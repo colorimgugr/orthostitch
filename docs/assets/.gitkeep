@@ -1,0 +1,14 @@
+# Drop screenshot files here (PNG/GIF). They are referenced by README.md.
+#
+# Expected files:
+#   screenshot_main.png         — full app window after a completed stitch
+#   screenshot_inputs.png       — Inputs card close-up
+#   screenshot_advanced.png     — Advanced options dialog
+#   screenshot_result_rgb.png   — pseudo-RGB viewer zoomed in on detail
+#   screenshot_result_seam.png  — seam map viewer
+#   screenshot_cli.png          — terminal output while running CLI mode
+#
+# Suggested capture settings:
+#   - macOS: Cmd+Shift+4 (region) or Cmd+Shift+3 (full screen)
+#   - Windows: Win+Shift+S or Snipping Tool
+#   - Resolution: at least 1280×800; save as PNG (not JPEG) for GUI shots

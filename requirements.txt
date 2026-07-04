@@ -1,0 +1,7 @@
+numpy
+opencv-python
+scipy
+tifffile
+imagecodecs
+PyQt6
+rawpy
