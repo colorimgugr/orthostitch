@@ -38,11 +38,13 @@ ICON = ICON_MAC if IS_MAC else (ICON_WIN if IS_WIN else None)
 # ── collect_all for packages that ship native libraries PyInstaller may miss ─
 datas, binaries, hidden = [], [], []
 
-for pkg in ('rawpy', 'imagecodecs', 'cv2'):
+for pkg in ('rawpy', 'imagecodecs'):
     d, b, h = collect_all(pkg)
     datas    += d
     binaries += b
     hidden   += h
+# cv2 is intentionally NOT in collect_all: PyInstaller has a built-in hook for
+# opencv-python and collect_all causes a double-import recursion crash on macOS.
 
 # scipy hidden submodules (numeric routines loaded at runtime via Cython)
 hidden += collect_submodules('scipy')
@@ -65,7 +67,7 @@ a = Analysis(
     ],
     hookspath=[],
     hooksconfig={},
-    runtime_hooks=[],
+    runtime_hooks=['rthook_cv2.py'],
     excludes=['tkinter', 'matplotlib', 'pandas', 'IPython', 'notebook'],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,

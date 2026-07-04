@@ -43,7 +43,6 @@ if [[ $ONEFILE -eq 1 ]]; then
         --hidden-import ortho \
         --collect-all rawpy \
         --collect-all imagecodecs \
-        --collect-all cv2 \
         --collect-submodules scipy \
         --exclude-module tkinter \
         gui.py
