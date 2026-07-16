@@ -1,4 +1,4 @@
-# HSI Stitcher
+# OrthoStitch
 
 > Lossless ortho-anchored panorama stitching for hyperspectral and photographic imaging tiles — with a cross-platform desktop GUI.
 
@@ -14,7 +14,7 @@
 
 ## Overview
 
-HSI Stitcher takes a grid (or irregular layout) of imaging tiles — either hyperspectral cubes (ENVI BIL) or photographic captures (PNG / TIFF / JPEG / Nikon NEF RAW) — and assembles them into a single, spatially-consistent panorama using a reference orthoimage of the same subject.
+OrthoStitch takes a grid (or irregular layout) of imaging tiles — either hyperspectral cubes (ENVI BIL) or photographic captures (PNG / TIFF / JPEG / Nikon NEF RAW) — and assembles them into a single, spatially-consistent panorama using a reference orthoimage of the same subject.
 
 The pipeline is fully **lossless**: every pixel in the output is a bit-exact copy of exactly one source tile pixel. Geometry is estimated entirely on derived grayscale images; spectral data is moved only by integer nearest-neighbor indexing — no interpolation, no blending, no photometric adjustment.
 
@@ -52,8 +52,8 @@ One modality per folder. Mixed folders are rejected with a clear error.
 ### Option A — from source (recommended for development)
 
 ```bash
-git clone https://github.com/<your-org>/hsi_stitcher.git
-cd hsi_stitcher
+git clone https://github.com/ossama971/orthostitch.git
+cd orthostitch
 pip install -r requirements.txt
 ```
 
@@ -76,9 +76,9 @@ Download the latest release for your platform from the
 
 | Platform | File | How to run |
 |---|---|---|
-| macOS | `HSI_Stitcher-mac.zip` → `HSI_Stitcher.app` | Double-click, or `open HSI_Stitcher.app` |
-| Windows | `HSI_Stitcher-win.zip` → `HSI_Stitcher/` | `HSI_Stitcher\HSI_Stitcher.exe` |
-| Linux | `HSI_Stitcher-linux.tar.gz` → `HSI_Stitcher/` | `./HSI_Stitcher/HSI_Stitcher` |
+| macOS | `OrthoStitch-mac.zip` → `OrthoStitch.app` | Double-click, or `open OrthoStitch.app` |
+| Windows | `OrthoStitch-win.zip` → `OrthoStitch/` | `OrthoStitch\OrthoStitch.exe` |
+| Linux | `OrthoStitch-linux.tar.gz` → `OrthoStitch/` | `./OrthoStitch/OrthoStitch` |
 
 > **macOS Gatekeeper note**: The app is unsigned. On first launch, right-click →
 > **Open** → **Open** to bypass the "unidentified developer" warning.
@@ -308,7 +308,7 @@ build_app.bat               # Windows
 bash build_app.sh --onefile
 ```
 
-Output goes to `dist/HSI_Stitcher/` (folder) and `dist/HSI_Stitcher.app` (macOS bundle).
+Output goes to `dist/OrthoStitch/` (folder) and `dist/OrthoStitch.app` (macOS bundle).
 
 ### GitHub Actions automated builds
 
@@ -353,7 +353,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: HSI_Stitcher-${{ matrix.os }}
+          name: OrthoStitch-${{ matrix.os }}
           path: hsi_stitcher/dist/
 ```
 
@@ -363,13 +363,13 @@ To distribute without the Gatekeeper warning:
 
 ```bash
 # Self-sign (allows local distribution)
-codesign --deep --force --sign - dist/HSI_Stitcher.app
+codesign --deep --force --sign - dist/OrthoStitch.app
 
 # Developer ID signing (requires Apple Developer account)
 codesign --deep --force \
     --sign "Developer ID Application: Your Name (TEAMID)" \
-    dist/HSI_Stitcher.app
-xcrun notarytool submit dist/HSI_Stitcher.zip \
+    dist/OrthoStitch.app
+xcrun notarytool submit dist/OrthoStitch.zip \
     --apple-id your@email.com --team-id TEAMID --wait
 ```
 
@@ -409,7 +409,7 @@ hsi_stitcher/
 ├── envi_io.py          Lightweight ENVI BIL reader/writer (header parsing, memmap)
 ├── ortho.py            Ortho reference loader (caches decoded grayscale at target px)
 ├── requirements.txt    Python dependencies
-├── hsi_stitcher.spec   PyInstaller build spec (all platforms)
+├── orthostitch.spec   PyInstaller build spec (all platforms)
 ├── build_app.sh        macOS / Linux build script
 ├── build_app.bat       Windows build script
 ├── tests/
@@ -473,15 +473,15 @@ re-running SIFT.
 
 ## Citation
 
-If you use HSI Stitcher in research, please cite:
+If you use OrthoStitch in research, please cite:
 
 ```bibtex
-@software{hsistitcher2026,
-  title   = {{HSI Stitcher}: lossless ortho-anchored panorama stitching
+@software{orthostitch2026,
+  title   = {{OrthoStitch}: lossless ortho-anchored panorama stitching
              for multi-modal cultural heritage imaging},
   author  = {Mohamed, Osama and Color Imaging Lab, University of Granada},
   year    = {2026},
-  url     = {https://github.com/<your-org>/hsi_stitcher}
+  url     = {https://github.com/ossama971/orthostitch}
 }
 ```
 

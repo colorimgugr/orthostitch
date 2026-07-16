@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Build the HSI Stitcher stand-alone app for macOS or Linux.
+# Build the OrthoStitch stand-alone app for macOS or Linux.
 #
 # Usage:
-#   bash build_app.sh           # normal build
+#   bash build_app.sh           # normal build (recommended)
 #   bash build_app.sh --onefile # single-file variant (slower start-up)
 #
 # Output:
-#   dist/HSI_Stitcher/          portable directory (all platforms)
-#   dist/HSI_Stitcher.app       macOS .app bundle  (macOS only)
+#   dist/OrthoStitch/          portable directory (all platforms)
+#   dist/OrthoStitch.app       macOS .app bundle  (macOS only)
 #
 # Requirements: Python 3.9+, the project's requirements.txt already installed.
 #   pip install -r requirements.txt
@@ -36,7 +36,7 @@ if [[ $ONEFILE -eq 1 ]]; then
     pyinstaller --clean --noconfirm \
         --onefile \
         --windowed \
-        --name HSI_Stitcher \
+        --name OrthoStitch \
         --hidden-import stitcher \
         --hidden-import modality \
         --hidden-import envi_io \
@@ -45,24 +45,25 @@ if [[ $ONEFILE -eq 1 ]]; then
         --collect-all imagecodecs \
         --collect-submodules scipy \
         --exclude-module tkinter \
+        --runtime-hook rthook_cv2.py \
         gui.py
     echo ""
-    echo "==> Built: dist/HSI_Stitcher"
+    echo "==> Built: dist/OrthoStitch"
 else
-    echo "==> Building from hsi_stitcher.spec …"
-    pyinstaller --clean --noconfirm hsi_stitcher.spec
+    echo "==> Building from orthostitch.spec …"
+    pyinstaller --clean --noconfirm orthostitch.spec
     echo ""
-    echo "==> Built: dist/HSI_Stitcher/"
+    echo "==> Built: dist/OrthoStitch/"
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "    macOS bundle: dist/HSI_Stitcher.app"
+        echo "    macOS bundle: dist/OrthoStitch.app"
         echo ""
-        echo "    To run:  open dist/HSI_Stitcher.app"
+        echo "    To run:  open dist/OrthoStitch.app"
         echo ""
         echo "    NOTE: macOS Gatekeeper will block unsigned apps. Right-click →"
         echo "    Open → Open to bypass on first launch, or sign with:"
-        echo "      codesign --deep --force --sign - dist/HSI_Stitcher.app"
+        echo "      codesign --deep --force --sign - dist/OrthoStitch.app"
     else
         echo ""
-        echo "    To run:  ./dist/HSI_Stitcher/HSI_Stitcher"
+        echo "    To run:  ./dist/OrthoStitch/OrthoStitch"
     fi
 fi

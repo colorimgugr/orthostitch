@@ -1,4 +1,4 @@
-"""Modern PyQt6 GUI for the lossless ortho-anchored HSI stitcher.
+"""Modern PyQt6 GUI for the lossless ortho-anchored multi-modal stitcher.
 
 Layout is a flexible 2x2 grid (draggable splitters, scrollable):
   top-left  = inputs        top-right = progress
@@ -353,7 +353,7 @@ class Worker(QThread):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("HSI Stitcher")
+        self.setWindowTitle("OrthoStitch")
         self.resize(1180, 880)
         self.worker = None
         self._params = stitcher.get_default_params()
@@ -367,9 +367,9 @@ class MainWindow(QWidget):
         # compact header
         header = QHBoxLayout()
         header.setContentsMargins(22, 14, 22, 6)
-        title = QLabel("HSI Stitcher")
+        title = QLabel("OrthoStitch")
         title.setObjectName("Title")
-        sub = QLabel("   Lossless ortho-anchored hyperspectral panorama stitching")
+        sub = QLabel("   Lossless ortho-anchored multi-modal panorama stitching")
         sub.setObjectName("Subtitle")
         header.addWidget(title)
         header.addWidget(sub)

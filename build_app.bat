@@ -1,5 +1,5 @@
 @echo off
-REM Build the HSI Stitcher stand-alone app for Windows.
+REM Build the OrthoStitch stand-alone app for Windows.
 REM
 REM Usage:
 REM   build_app.bat            normal build (dist\ folder)
@@ -31,7 +31,7 @@ if "%ONEFILE%"=="1" (
     pyinstaller --clean --noconfirm ^
         --onefile ^
         --windowed ^
-        --name HSI_Stitcher ^
+        --name OrthoStitch ^
         --hidden-import stitcher ^
         --hidden-import modality ^
         --hidden-import envi_io ^
@@ -40,17 +40,18 @@ if "%ONEFILE%"=="1" (
         --collect-all imagecodecs ^
         --collect-submodules scipy ^
         --exclude-module tkinter ^
+        --runtime-hook rthook_cv2.py ^
         gui.py
     if errorlevel 1 goto :err
     echo.
-    echo =^=^> Built: dist\HSI_Stitcher.exe
+    echo =^=^> Built: dist\OrthoStitch.exe
 ) else (
-    echo ==> Building from hsi_stitcher.spec …
-    pyinstaller --clean --noconfirm hsi_stitcher.spec
+    echo ==> Building from orthostitch.spec …
+    pyinstaller --clean --noconfirm orthostitch.spec
     if errorlevel 1 goto :err
     echo.
-    echo =^=^> Built: dist\HSI_Stitcher\
-    echo     To run:  dist\HSI_Stitcher\HSI_Stitcher.exe
+    echo =^=^> Built: dist\OrthoStitch\
+    echo     To run:  dist\OrthoStitch\OrthoStitch.exe
 )
 goto :eof
 

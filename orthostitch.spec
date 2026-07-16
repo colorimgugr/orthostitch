@@ -1,17 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
 #
-# PyInstaller spec for HSI Stitcher — cross-platform, single spec.
+# PyInstaller spec for OrthoStitch — cross-platform, single spec.
 #
 # Supports: macOS (.app bundle), Windows (.exe), Linux (ELF binary)
 #
 # Build:
 #   Mac/Linux:  bash build_app.sh
 #   Windows:    build_app.bat
-#   or manually: pyinstaller --clean hsi_stitcher.spec
+#   or manually: pyinstaller --clean orthostitch.spec
 #
 # Output:
-#   dist/HSI_Stitcher/          portable folder (all platforms)
-#   dist/HSI_Stitcher.app       macOS .app bundle (macOS only)
+#   dist/OrthoStitch/          portable folder (all platforms)
+#   dist/OrthoStitch.app       macOS .app bundle (macOS only)
 #
 # ─── Icon ────────────────────────────────────────────────────────────────────
 # Place your icon files at:
@@ -81,7 +81,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='HSI_Stitcher',
+    name='OrthoStitch',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -101,7 +101,7 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='HSI_Stitcher',
+    name='OrthoStitch',
 )
 
 # ── macOS .app bundle ─────────────────────────────────────────────────────────
@@ -109,9 +109,9 @@ if IS_MAC:
     from PyInstaller.building.osx import BUNDLE
     app = BUNDLE(
         coll,
-        name='HSI_Stitcher.app',
+        name='OrthoStitch.app',
         icon=ICON_MAC,
-        bundle_identifier='es.ugr.colorimaginglab.hsistitcher',
+        bundle_identifier='es.ugr.colorimaginglab.orthostitch',
         info_plist={
             # Enables native Retina rendering
             'NSHighResolutionCapable': True,
