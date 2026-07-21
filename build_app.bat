@@ -32,6 +32,7 @@ if "%ONEFILE%"=="1" (
         --onefile ^
         --windowed ^
         --name OrthoStitch ^
+        --paths src ^
         --hidden-import stitcher ^
         --hidden-import modality ^
         --hidden-import envi_io ^
@@ -40,8 +41,8 @@ if "%ONEFILE%"=="1" (
         --collect-all imagecodecs ^
         --collect-submodules scipy ^
         --exclude-module tkinter ^
-        --runtime-hook rthook_cv2.py ^
-        gui.py
+        --runtime-hook src/rthook_cv2.py ^
+        src/gui.py
     if errorlevel 1 goto :err
     echo.
     echo =^=^> Built: dist\OrthoStitch.exe

@@ -51,10 +51,10 @@ hidden += collect_submodules('scipy')
 
 # ── Analysis ─────────────────────────────────────────────────────────────────
 a = Analysis(
-    ['gui.py'],
+    ['src/gui.py'],
     # pathex makes the sibling modules (stitcher, modality, envi_io, ortho)
-    # importable — they live in the same directory as gui.py
-    pathex=[os.path.abspath('.')],
+    # importable — they live in the same directory as gui.py (src/)
+    pathex=[os.path.abspath('src')],
     binaries=binaries,
     datas=datas,
     hiddenimports=hidden + [
@@ -67,7 +67,7 @@ a = Analysis(
     ],
     hookspath=[],
     hooksconfig={},
-    runtime_hooks=['rthook_cv2.py'],
+    runtime_hooks=['src/rthook_cv2.py'],
     excludes=['tkinter', 'matplotlib', 'pandas', 'IPython', 'notebook'],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,

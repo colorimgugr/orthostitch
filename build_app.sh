@@ -37,6 +37,7 @@ if [[ $ONEFILE -eq 1 ]]; then
         --onefile \
         --windowed \
         --name OrthoStitch \
+        --paths src \
         --hidden-import stitcher \
         --hidden-import modality \
         --hidden-import envi_io \
@@ -45,8 +46,8 @@ if [[ $ONEFILE -eq 1 ]]; then
         --collect-all imagecodecs \
         --collect-submodules scipy \
         --exclude-module tkinter \
-        --runtime-hook rthook_cv2.py \
-        gui.py
+        --runtime-hook src/rthook_cv2.py \
+        src/gui.py
     echo ""
     echo "==> Built: dist/OrthoStitch"
 else

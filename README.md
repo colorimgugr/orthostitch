@@ -91,9 +91,9 @@ Download the latest release for your platform from the
 ### GUI
 
 ```bash
-python hsi_stitcher/gui.py
+python hsi_stitcher/src/gui.py
 # or, from inside the hsi_stitcher/ directory:
-python gui.py
+python src/gui.py
 ```
 
 <!-- ![Inputs card](docs/assets/screenshot_inputs.png) -->
@@ -132,7 +132,7 @@ Click **Open output folder** to reveal all output files in Finder / Explorer.
 ### CLI
 
 ```bash
-python hsi_stitcher/stitcher.py \
+python hsi_stitcher/src/stitcher.py \
     --tiles /path/to/tiles_folder \
     --ortho /path/to/ortho.tif \
     --out   /path/to/output \
@@ -401,24 +401,28 @@ tests/test_integration.py  end-to-end: stitch → lossless check → placement.j
 
 ```
 hsi_stitcher/
-├── gui.py              PyQt6 desktop application (entry point for GUI)
-├── stitcher.py         Core pipeline: feature detection, matching, bundle adjustment,
-│                       assembly, lossless verification
-├── modality.py         Format-aware tile loaders: EnviLoader (BIL) + ImageLoader
-│                       (PNG/TIFF/JPEG/NEF); auto-detection by extension
-├── envi_io.py          Lightweight ENVI BIL reader/writer (header parsing, memmap)
-├── ortho.py            Ortho reference loader (caches decoded grayscale at target px)
-├── requirements.txt    Python dependencies
-├── orthostitch.spec   PyInstaller build spec (all platforms)
-├── build_app.sh        macOS / Linux build script
-├── build_app.bat       Windows build script
+├── src/                    Application source (all Python modules live here)
+│   ├── gui.py              PyQt6 desktop application (entry point for GUI)
+│   ├── stitcher.py         Core pipeline: feature detection, matching, bundle
+│   │                       adjustment, assembly, lossless verification
+│   ├── modality.py         Format-aware tile loaders: EnviLoader (BIL) + ImageLoader
+│   │                       (PNG/TIFF/JPEG/NEF); auto-detection by extension
+│   ├── envi_io.py          Lightweight ENVI BIL reader/writer (header parsing, memmap)
+│   ├── ortho.py            Ortho reference loader (caches decoded grayscale at target px)
+│   ├── rthook_cv2.py       PyInstaller runtime hook (fixes cv2 recursion in bundles)
+│   └── __init__.py
 ├── tests/
-│   ├── conftest.py     Pytest fixtures
+│   ├── conftest.py         Pytest fixtures
 │   ├── test_modality.py
 │   ├── test_engine.py
 │   └── test_integration.py
-└── docs/
-    └── assets/         Screenshot files (add yours here; see .gitkeep)
+├── docs/
+│   └── assets/             Screenshot files (add yours here; see .gitkeep)
+├── conftest.py             Adds src/ to sys.path for the test suite
+├── requirements.txt        Python dependencies
+├── orthostitch.spec        PyInstaller build spec (all platforms)
+├── build_app.sh            macOS / Linux build script
+└── build_app.bat           Windows build script
 ```
 
 ### Key data flow
